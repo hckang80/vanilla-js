@@ -1,7 +1,12 @@
 export default function SearchResult ({ $target, list = [] }) {
   const CLASS_NAME = 'searched-list'
-  const hasWrap = document.querySelector(`.${CLASS_NAME}`)
-  hasWrap && hasWrap.remove()
+
+  const clearList = () => {
+    const hasWrap = document.querySelector(`.${CLASS_NAME}`)
+    hasWrap && hasWrap.remove()
+  }
+
+  clearList()
 
   this.render = () => {
     if (!list.length) return
