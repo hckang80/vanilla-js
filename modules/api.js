@@ -1,4 +1,4 @@
-const BASE_URI = 'https://api.instantwebtools.net/v1'
+const BASE_URI = 'https://wr4a6p937i.execute-api.ap-northeast-2.amazonaws.com/dev'
 
 export const request = async (url, options = {}) => {
   try {

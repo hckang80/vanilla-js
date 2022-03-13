@@ -9,7 +9,10 @@ const el = {
 }
 
 el.search.input.addEventListener('input', async (event) => {
-  const list = await request('/airlines')
+  const { form: $target } = el.search
+  const list = event.target.value
+    ? await request(`/languages?keyword=${event.target.value}`)
+    : []
 
-  new SearchResult({ $target: el.search.form, list }).render()
+  new SearchResult({ $target, list }).render()
 })
