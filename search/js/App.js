@@ -3,7 +3,8 @@ import { request } from '/modules/api.js'
 
 export default function App () {
   let state = {
-    list: []
+    list: [],
+    selectedItemIndex: 0
   }
 
   const el = {
@@ -20,8 +21,7 @@ export default function App () {
     }
 
     const { form: $target } = el.search
-    const { list } = state
-    new SearchResult({ $target, list }).render()
+    new SearchResult({ $target, ...state }).render()
   }
 
   el.search.input.addEventListener('input', async (event) => {
@@ -30,5 +30,17 @@ export default function App () {
       : []
 
     this.setState({ list })
+  })
+
+  el.search.input.addEventListener('keyup', (event) => {
+    if (!state.list.length) return
+    if (event.key === 'ArrowDown') {
+      state.selectedItemIndex === state.list.length && this.setState({ selectedItemIndex: 0 })
+      this.setState({ selectedItemIndex: state.selectedItemIndex += 1 })
+    }
+    if (event.key === 'ArrowUp' && state.selectedItemIndex) {
+      state.selectedItemIndex === 1 && this.setState({ selectedItemIndex: state.list.length + 1 })
+      this.setState({ selectedItemIndex: state.selectedItemIndex -= 1 })
+    }
   })
 }

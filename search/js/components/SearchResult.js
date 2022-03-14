@@ -1,4 +1,4 @@
-export default function SearchResult ({ $target, list = [] }) {
+export default function SearchResult ({ $target, list = [], selectedItemIndex }) {
   const CLASS_NAME = 'searched-list'
 
   const clearList = () => {
@@ -10,10 +10,11 @@ export default function SearchResult ({ $target, list = [] }) {
 
   this.render = () => {
     if (!list.length) return
+    console.log('#', selectedItemIndex)
     const $wrap = document.createElement('ul')
     $wrap.className = CLASS_NAME
-    $wrap.innerHTML = list.map(item => `
-      <li>${item}</li>
+    $wrap.innerHTML = list.map((item, index) => `
+      <li class="${selectedItemIndex === index + 1 ? 'suggestion__item--selected' : ''}">${item}</li>
     `).join('')
 
     $target.insertAdjacentHTML('afterend', $wrap.outerHTML)
