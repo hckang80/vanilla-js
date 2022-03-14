@@ -21,7 +21,7 @@ export default function App () {
     }
 
     const { form: $target } = el.search
-    new SearchResult({ $target, ...state }).render()
+    new SearchResult({ $target, ...state })
   }
 
   el.search.input.addEventListener('input', async (event) => {

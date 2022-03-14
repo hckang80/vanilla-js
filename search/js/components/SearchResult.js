@@ -10,7 +10,6 @@ export default function SearchResult ({ $target, list = [], selectedItemIndex })
 
   this.render = () => {
     if (!list.length) return
-    console.log('#', selectedItemIndex)
     const $wrap = document.createElement('ul')
     $wrap.className = CLASS_NAME
     $wrap.innerHTML = list.map((item, index) => `
@@ -19,4 +18,6 @@ export default function SearchResult ({ $target, list = [], selectedItemIndex })
 
     $target.insertAdjacentHTML('afterend', $wrap.outerHTML)
   }
+
+  this.render()
 }
