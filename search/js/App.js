@@ -43,4 +43,9 @@ export default function App () {
       this.setState({ selectedItemIndex: state.selectedItemIndex -= 1 })
     }
   })
+
+  window.addEventListener('click', (event) => {
+    if (!event.target.dataset?.id) return
+    this.setState({ selectedItemIndex: +event.target.dataset.id })
+  })
 }

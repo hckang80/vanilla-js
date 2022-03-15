@@ -13,7 +13,7 @@ export default function SearchResult ({ $target, list = [], selectedItemIndex })
     const $wrap = document.createElement('ul')
     $wrap.className = CLASS_NAME
     $wrap.innerHTML = list.map((item, index) => `
-      <li class="${selectedItemIndex === index + 1 ? 'suggestion__item--selected' : ''}">${item}</li>
+      <li data-id="${index + 1}" class="${selectedItemIndex === index + 1 ? 'suggestion__item--selected' : ''}">${item}</li>
     `).join('')
 
     $target.insertAdjacentHTML('afterend', $wrap.outerHTML)
