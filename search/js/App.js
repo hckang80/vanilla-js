@@ -32,6 +32,10 @@ export default function App () {
     this.setState({ list })
   })
 
+  el.search.form.addEventListener('submit', (event) => {
+    event.preventDefault()
+  })
+
   window.addEventListener('keyup', (event) => {
     if (!state.list.length) return
     if (event.key === 'ArrowDown') {
