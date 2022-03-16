@@ -1,3 +1,4 @@
+import SearchList from './components/SearchList.js'
 import SearchResult from './components/SearchResult.js'
 import { request } from '/modules/api.js'
 
@@ -8,6 +9,7 @@ export default function App () {
   }
 
   const el = {
+    selectedList: document.querySelector('.selected-list'),
     search: {
       form: document.querySelector('.search-form'),
       input: document.querySelector('.search-form__input')
@@ -45,6 +47,10 @@ export default function App () {
     if (event.key === 'ArrowUp' && state.selectedItemIndex) {
       state.selectedItemIndex === 1 && this.setState({ selectedItemIndex: state.list.length + 1 })
       this.setState({ selectedItemIndex: state.selectedItemIndex -= 1 })
+    }
+    if (event.key === 'Enter' && state.selectedItemIndex) {
+      new SearchList({ $target: el.selectedList, item: state.list[state.selectedItemIndex - 1] })
+        .addList()
     }
   })
 
