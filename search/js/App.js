@@ -32,7 +32,7 @@ export default function App () {
     this.setState({ list })
   })
 
-  el.search.input.addEventListener('keyup', (event) => {
+  window.addEventListener('keyup', (event) => {
     if (!state.list.length) return
     if (event.key === 'ArrowDown') {
       state.selectedItemIndex === state.list.length && this.setState({ selectedItemIndex: 0 })
