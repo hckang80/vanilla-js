@@ -1,4 +1,6 @@
-export default function SearchList ({ $target, item = '' }) {
+export default function SearchList ({ item = '' }) {
+  const $target = document.querySelector('.selected-list')
+
   this.state = {
     list: []
   }

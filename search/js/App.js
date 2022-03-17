@@ -9,7 +9,6 @@ export default function App () {
   }
 
   const el = {
-    selectedList: document.querySelector('.selected-list'),
     search: {
       form: document.querySelector('.search-form'),
       input: document.querySelector('.search-form__input')
@@ -49,7 +48,7 @@ export default function App () {
       this.setState({ selectedItemIndex: state.selectedItemIndex -= 1 })
     }
     if (event.key === 'Enter' && state.selectedItemIndex) {
-      new SearchList({ $target: el.selectedList, item: state.list[state.selectedItemIndex - 1] })
+      new SearchList({ item: state.list[state.selectedItemIndex - 1] })
         .addList()
     }
   })
@@ -57,7 +56,7 @@ export default function App () {
   window.addEventListener('click', (event) => {
     if (!event.target.dataset?.id) return
     this.setState({ selectedItemIndex: +event.target.dataset.id })
-    new SearchList({ $target: el.selectedList, item: state.list[+event.target.dataset.id - 1] })
+    new SearchList({ item: state.list[+event.target.dataset.id - 1] })
       .addList()
   })
 }
