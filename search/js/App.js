@@ -57,5 +57,7 @@ export default function App () {
   window.addEventListener('click', (event) => {
     if (!event.target.dataset?.id) return
     this.setState({ selectedItemIndex: +event.target.dataset.id })
+    new SearchList({ $target: el.selectedList, item: state.list[+event.target.dataset.id - 1] })
+      .addList()
   })
 }
