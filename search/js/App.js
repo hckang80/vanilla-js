@@ -24,12 +24,11 @@ export default function App () {
 
     const { form: $target } = el.search
     new SearchResult({ $target, ...state })
-    new SearchList({ list: state.selectedList })
   }
 
   this.addList = (item) => {
-    const selectedList = [...state.selectedList, item]
-    this.setState({ selectedList })
+    state.selectedList = [...state.selectedList, item]
+    new SearchList({ selectedList: state.selectedList })
   }
 
   el.search.input.addEventListener('input', async (event) => {
