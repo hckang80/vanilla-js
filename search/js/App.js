@@ -5,7 +5,8 @@ import { request } from '/modules/api.js'
 export default function App () {
   let state = {
     list: [],
-    selectedItemIndex: 0
+    selectedItemIndex: 0,
+    selectedList: []
   }
 
   const el = {
@@ -23,6 +24,12 @@ export default function App () {
 
     const { form: $target } = el.search
     new SearchResult({ $target, ...state })
+    new SearchList({ list: state.selectedList })
+  }
+
+  this.addList = (item) => {
+    const selectedList = [...state.selectedList, item]
+    this.setState({ selectedList })
   }
 
   el.search.input.addEventListener('input', async (event) => {
@@ -48,15 +55,13 @@ export default function App () {
       this.setState({ selectedItemIndex: state.selectedItemIndex -= 1 })
     }
     if (event.key === 'Enter' && state.selectedItemIndex) {
-      new SearchList({ item: state.list[state.selectedItemIndex - 1] })
-        .addList()
+      this.addList(state.list[state.selectedItemIndex - 1])
     }
   })
 
   window.addEventListener('click', (event) => {
     if (!event.target.dataset?.id) return
+    this.addList(state.list[+event.target.dataset.id - 1])
     this.setState({ selectedItemIndex: +event.target.dataset.id })
-    new SearchList({ item: state.list[+event.target.dataset.id - 1] })
-      .addList()
   })
 }

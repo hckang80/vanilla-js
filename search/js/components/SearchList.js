@@ -1,29 +1,14 @@
-export default function SearchList ({ item = '' }) {
+export default function SearchList ({ list = [] }) {
   const $target = document.querySelector('.selected-list')
-
-  this.state = {
-    list: []
-  }
-
-  this.setState = (state) => {
-    this.state = {
-      ...this.state,
-      ...state
-    }
-    this.render()
-  }
-
-  this.addList = () => {
-    const list = [...this.state.list, item]
-    this.setState({ list })
-  }
+  const $wrap = $target.children[0] || document.createElement('ul')
 
   this.render = () => {
-    const $wrap = document.createElement('ul')
-    $wrap.innerHTML = this.state.list.map((item) => `
+    $wrap.innerHTML = list.map((item) => `
       <li>${item}</li>
     `).join('')
 
     $target.appendChild($wrap)
   }
+
+  this.render()
 }
