@@ -27,10 +27,11 @@ export default function App () {
   }
 
   this.addList = (item) => {
-    state.selectedList.includes(item) &&
-      state.selectedList.splice(state.selectedList.indexOf(item), 1)
-    state.selectedList = [...state.selectedList, item].slice(-5)
-    new SearchList({ selectedList: state.selectedList })
+    let { selectedList } = state
+    selectedList.includes(item) &&
+      selectedList.splice(selectedList.indexOf(item), 1)
+    selectedList = [...selectedList, item].slice(-5)
+    new SearchList({ selectedList: selectedList })
   }
 
   el.search.input.addEventListener('input', async (event) => {
