@@ -1,6 +1,7 @@
 import SearchList from './components/SearchList.js'
 import SearchResult from './components/SearchResult.js'
 import { request } from '/modules/api.js'
+import { debounce } from '/composables/index.js'
 
 export default function App () {
   let state = {
@@ -34,13 +35,13 @@ export default function App () {
     new SearchList({ selectedList: selectedList })
   }
 
-  el.search.input.addEventListener('input', async (event) => {
+  el.search.input.addEventListener('input', debounce(async (event) => {
     const list = event.target.value
       ? await request(`/languages?keyword=${event.target.value}`)
       : []
 
     this.setState({ list })
-  })
+  }, 500))
 
   el.search.form.addEventListener('submit', (event) => {
     event.preventDefault()
