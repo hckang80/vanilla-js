@@ -27,7 +27,9 @@ export default function App () {
   }
 
   this.addList = (item) => {
-    state.selectedList = [...state.selectedList, item]
+    state.selectedList.includes(item) &&
+      state.selectedList.splice(state.selectedList.indexOf(item), 1)
+    state.selectedList = [...state.selectedList, item].slice(-5)
     new SearchList({ selectedList: state.selectedList })
   }
 
