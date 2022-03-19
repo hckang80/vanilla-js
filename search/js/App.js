@@ -10,6 +10,8 @@ export default function App () {
     selectedList: []
   }
 
+  let { selectedList } = state
+
   const el = {
     search: {
       form: document.querySelector('.search-form'),
@@ -28,11 +30,10 @@ export default function App () {
   }
 
   this.addList = (item) => {
-    let { selectedList } = state
     selectedList.includes(item) &&
       selectedList.splice(selectedList.indexOf(item), 1)
     selectedList = [...selectedList, item].slice(-5)
-    new SearchList({ selectedList: selectedList })
+    new SearchList({ selectedList })
   }
 
   el.search.input.addEventListener('input', debounce(async (event) => {
