@@ -19,6 +19,10 @@ export default function App () {
     }
   }
 
+  const inputKeyword = async (value = '') => {
+    return await request(`/languages?keyword=${value}`)
+  }
+
   this.setState = (obj) => {
     state = {
       ...state,
@@ -38,7 +42,7 @@ export default function App () {
 
   el.search.input.addEventListener('input', debounce(async (event) => {
     const list = event.target.value
-      ? await request(`/languages?keyword=${event.target.value}`)
+      ? await inputKeyword(event.target.value)
       : []
 
     this.setState({ list })
