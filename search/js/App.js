@@ -1,6 +1,10 @@
 import SearchList from './components/SearchList.js'
 import SearchResult from './components/SearchResult.js'
 import { request } from '/modules/api.js'
+import {
+  getItem,
+  setItem
+} from '/modules/storage.js'
 import { debounce } from '/composables/index.js'
 
 export default function App () {
@@ -19,8 +23,10 @@ export default function App () {
     }
   }
 
-  const inputKeyword = async (value = '') => {
-    return await request(`/languages?keyword=${value}`)
+  const inputKeyword = async (key = '') => {
+    const response = getItem(key) || await request(`/languages?keyword=${key}`)
+    !getItem(key) && setItem(key, response)
+    return response
   }
 
   this.setState = (obj) => {
